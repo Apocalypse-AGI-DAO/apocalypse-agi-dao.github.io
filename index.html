@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>火种计划 Fireseed</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="火种计划：一个开放的技术共同体，追踪并共建自主可控的前沿技术。Project Fireseed: an open community tracking and building frontier technology anyone can own.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a field manual. Grid index of the eight frontiers, then the reading log; one ember accent for anything alive. */
+:root{
+  --ash:#E6E8E6; --paper:#F8F8F6; --ink:#1A2226; --slate:#55626A; --line:#C6CCCB;
+  --ember:#B4570A; --ember-soft:#F4DFC6; --on-ember:#FFFFFF;
+  --serif:"Noto Serif SC","Songti SC","STSong",Georgia,serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"JetBrains Mono","SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ash:#121617; --paper:#1A2022; --ink:#E5E8E6; --slate:#9AA5A8; --line:#2C3538;
+  --ember:#F08A3A; --ember-soft:#3A2414; --on-ember:#1A1206; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ash:#121617; --paper:#1A2022; --ink:#E5E8E6; --slate:#9AA5A8; --line:#2C3538;
+  --ember:#F08A3A; --ember-soft:#3A2414; --on-ember:#1A1206; color-scheme:dark}
+*{box-sizing:border-box}
+html[lang="en"] .zh, html:not([lang="en"]) .en{display:none!important}
+body{background:var(--ash);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.8;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+html[lang="en"] body{line-height:1.65}
+a{color:inherit;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--ember);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:26px}
+.brand{font-family:var(--serif);font-weight:900;font-size:21px;text-decoration:none}
+.brand small{font-family:var(--mono);font-weight:400;font-size:12px;letter-spacing:.14em;color:var(--slate);margin-left:8px}
+.right{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+nav{display:flex;gap:22px;flex-wrap:wrap;font-size:14.5px;color:var(--slate)}
+nav a{text-decoration:none}nav a:hover{color:var(--ink)}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden;font-family:var(--mono);font-size:12.5px}
+.lang button{background:none;border:0;color:var(--slate);padding:4px 11px;cursor:pointer;font:inherit}
+.lang button[aria-pressed="true"]{background:var(--ember);color:var(--on-ember)}
+
+.hero{padding-block:48px 44px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:end}
+@media (max-width:820px){.hero{grid-template-columns:1fr}}
+.kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;color:var(--ember)}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(34px,6.2vw,64px);line-height:1.15;margin:10px 0 18px;text-wrap:balance}
+html[lang="en"] h1{font-size:clamp(32px,5.4vw,56px);letter-spacing:-.01em}
+.lead{color:var(--slate);font-size:18px;margin:0;max-width:32em}
+.creed{border-left:3px solid var(--ember);padding:4px 0 4px 18px;font-family:var(--serif);font-size:19px;line-height:1.7;display:grid;gap:10px}
+.creed p{margin:0}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-block;padding:10px 18px;border:1px solid var(--ink);text-decoration:none;font-weight:500;font-size:15px;border-radius:4px}
+.btn.solid{background:var(--ember);border-color:var(--ember);color:var(--on-ember)}
+
+section{padding-block:50px;border-top:1px solid var(--line)}
+h2{font-family:var(--serif);font-weight:900;font-size:clamp(24px,3.4vw,32px);margin:0 0 6px;text-wrap:balance}
+.sub{color:var(--slate);margin:0 0 26px;max-width:40em}
+
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.field{padding:18px 18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper);display:grid;gap:6px;align-content:start;min-width:0}
+.field .no{font-family:var(--mono);font-size:12px;color:var(--ember);letter-spacing:.1em}
+.field h3{font-family:var(--serif);font-size:18px;margin:0}
+.field p{margin:0;font-size:14.5px;color:var(--slate)}
+.field .state{font-family:var(--mono);font-size:12px;color:var(--slate);margin-top:4px}
+.field .state.live{color:var(--ember)}
+
+.issue{background:var(--paper);border:1px solid var(--line);border-radius:6px;display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr)}
+@media (max-width:720px){.issue{grid-template-columns:1fr}}
+.issue aside{padding:24px;border-right:1px solid var(--line);font-family:var(--mono);font-size:13px;color:var(--slate);display:grid;gap:8px;align-content:start}
+@media (max-width:720px){.issue aside{border-right:0;border-bottom:1px solid var(--line)}}
+.issue aside b{color:var(--ember);font-size:28px;font-weight:600}
+.issue .body{padding:24px 26px;display:grid;gap:14px;min-width:0}
+.issue h3{font-family:var(--serif);font-size:23px;margin:0;text-wrap:balance}
+.issue dl{margin:0;display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:10px 16px}
+@media (max-width:520px){.issue dl{grid-template-columns:1fr;gap:2px}.issue dd{margin-bottom:10px}}
+.issue dt{font-weight:700;font-size:14.5px}
+.issue dd{margin:0;color:var(--slate);font-size:15px}
+.fmt{font-size:14px;color:var(--slate);margin-top:14px}
+
+.proj{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:820px){.proj{grid-template-columns:1fr}}
+.proj h3{font-family:var(--serif);font-size:21px;margin:0 0 10px}
+.proj .d{margin:0 0 14px;color:var(--slate)}
+pre{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px;font-family:var(--mono);font-size:13px;line-height:1.7;overflow-x:auto}
+pre .c{color:var(--slate)}
+.proj ul{margin:0;padding-left:1.1em;display:grid;gap:6px}
+.badge{font-family:var(--mono);font-size:12px;background:var(--ember-soft);color:var(--ember);padding:2px 9px;border-radius:3px;margin-left:8px;vertical-align:middle}
+
+.ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:26px}
+.ways h4{font-family:var(--serif);font-size:18px;margin:0 0 4px}
+.ways p{margin:0;color:var(--slate);font-size:15px}
+.rules{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.rules span{border:1px solid var(--line);padding:4px 12px;border-radius:3px;font-size:14px;background:var(--paper)}
+
+footer{padding-block:34px 48px;border-top:1px solid var(--line);color:var(--slate);font-size:13.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header class="top">
+  <a class="brand" href="#top">火种计划<small>PROJECT FIRESEED</small></a>
+  <div class="right">
+    <nav>
+      <a href="#frontier"><span class="zh">前沿</span><span class="en">Frontiers</span></a>
+      <a href="#reading"><span class="zh">精读</span><span class="en">Deep reads</span></a>
+      <a href="#projects"><span class="zh">项目</span><span class="en">Projects</span></a>
+      <a href="#join"><span class="zh">参与</span><span class="en">Join</span></a>
+      <a href="https://github.com/Apocalypse-AGI-DAO/Fireseed" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language"><button type="button" id="l-zh" data-l="zh">中</button><button type="button" id="l-en" data-l="en">EN</button></div>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div>
+    <div class="kicker"><span class="zh">开放技术共同体 · 2026 年 11 月起步</span><span class="en">AN OPEN TECHNOLOGY COMMONS · STARTED NOV 2026</span></div>
+    <h1><span class="zh">追最前沿的技术，也让每个人都拿得到它。</span><span class="en">Follow the frontier, and put it in everyone's hands.</span></h1>
+    <p class="lead"><span class="zh">火种计划盯八个前沿方向：从本地运行的大模型，到开源机器人和脑机接口。我们每周把最重要的进展读透、讲清楚，再一起做能复现、能审计、谁都能部署的开源版本。</span><span class="en">Fireseed tracks eight frontiers, from large models that run locally to open robots and brain-computer interfaces. Each week we read the most important work closely and explain it plainly. Then we build open versions together that anyone can reproduce, audit and deploy.</span></p>
+    <div class="btns">
+      <a class="btn solid" href="#join"><span class="zh">加入共建</span><span class="en">Start contributing</span></a>
+      <a class="btn" href="#reading"><span class="zh">看本期精读</span><span class="en">Read this week's issue</span></a>
+    </div>
+  </div>
+  <div class="creed">
+    <p><span class="zh">技术不应成为统治工具，而应成为人类自由意志的外骨骼。</span><span class="en">Technology should not be an instrument of control. It should be an exoskeleton for human free will.</span></p>
+    <p><span class="zh">智能不应只属于少数机构，而应成为共同持有的基础设施。</span><span class="en">Intelligence should not belong to a few institutions. It should be infrastructure we hold in common.</span></p>
+  </div>
+</div>
+
+<section id="frontier">
+  <h2><span class="zh">八个前沿方向</span><span class="en">Eight frontiers</span></h2>
+  <p class="sub"><span class="zh">每个方向都在招方向负责人：每周盯住这个领域的新论文、新开源和新硬件，挑一件值得精读的。</span><span class="en">Every frontier needs a lead: someone who follows its new papers, open releases and hardware each week, and picks one piece worth a deep read.</span></p>
+  <div class="fields">
+    <div class="field"><span class="no">01</span><h3><span class="zh">自主可控 AI</span><span class="en">Sovereign AI</span></h3><p><span class="zh">开源大模型、长时记忆、本地与离线运行、压缩与量化。</span><span class="en">Open models, long-term memory, local and offline inference, compression and quantization.</span></p><span class="state live"><span class="zh">已开读 · 有在建项目</span><span class="en">Reading · project underway</span></span></div>
+    <div class="field"><span class="no">02</span><h3><span class="zh">去中心化算力</span><span class="en">Decentralized compute</span></h3><p><span class="zh">本地推理框架、分布式训练、社区算力网络、模型镜像与容灾。</span><span class="en">Local inference, distributed training, community compute networks, model mirrors and recovery.</span></p><span class="state"><span class="zh">招募负责人</span><span class="en">Lead wanted</span></span></div>
+    <div class="field"><span class="no">03</span><h3><span class="zh">开源机器人与具身智能</span><span class="en">Open robotics</span></h3><p><span class="zh">开源硬件平台、世界模型、模仿学习、灵巧手与触觉。</span><span class="en">Open hardware platforms, world models, imitation learning, dexterous hands and touch.</span></p><span class="state"><span class="zh">招募负责人</span><span class="en">Lead wanted</span></span></div>
+    <div class="field"><span class="no">04</span><h3><span class="zh">脑机接口与神经技术</span><span class="en">Neurotechnology</span></h3><p><span class="zh">非侵入式采集与解码、神经反馈、脑信号隐私、开放协议。</span><span class="en">Non-invasive recording and decoding, neurofeedback, neural data privacy, open protocols.</span></p><span class="state"><span class="zh">招募负责人</span><span class="en">Lead wanted</span></span></div>
+    <div class="field"><span class="no">05</span><h3><span class="zh">隐私与安全</span><span class="en">Privacy and security</span></h3><p><span class="zh">端侧加密、联邦学习、可信执行环境、模型对抗与防操纵。</span><span class="en">On-device encryption, federated learning, trusted execution, adversarial robustness.</span></p><span class="state"><span class="zh">招募负责人</span><span class="en">Lead wanted</span></span></div>
+    <div class="field"><span class="no">06</span><h3><span class="zh">开源硬件与制造</span><span class="en">Open hardware</span></h3><p><span class="zh">控制板与传感器、零部件标准化、可维修设计、完整 BOM 文档。</span><span class="en">Boards and sensors, standard parts, repairable design, complete bills of materials.</span></p><span class="state"><span class="zh">招募负责人</span><span class="en">Lead wanted</span></span></div>
+    <div class="field"><span class="no">07</span><h3><span class="zh">知识保存</span><span class="en">Knowledge preservation</span></h3><p><span class="zh">开源知识库、复现文档、关键技术树、离线可访问的归档。</span><span class="en">Open knowledge bases, reproduction guides, technology trees, offline archives.</span></p><span class="state"><span class="zh">招募负责人</span><span class="en">Lead wanted</span></span></div>
+    <div class="field"><span class="no">08</span><h3><span class="zh">治理与伦理</span><span class="en">Governance and ethics</span></h3><p><span class="zh">AI 治理、平台垄断、自动化时代的劳动、开源社区治理。</span><span class="en">AI governance, platform monopolies, work under automation, governing open communities.</span></p><span class="state"><span class="zh">招募负责人</span><span class="en">Lead wanted</span></span></div>
+  </div>
+</section>
+
+<section id="reading">
+  <h2><span class="zh">前沿精读</span><span class="en">Frontier deep reads</span></h2>
+  <p class="sub"><span class="zh">每周一篇。只读有原文可查的工作，五件事讲清楚再发。</span><span class="en">One a week. We only cover work with a public source, and every issue answers the same five questions.</span></p>
+  <article class="issue">
+    <aside><b>001</b><span><span class="zh">方向 01 · 自主可控 AI</span><span class="en">Frontier 01 · Sovereign AI</span></span><span>2026-11-15</span><span><span class="zh">模型：Dory 4B，开源</span><span class="en">Model: Dory 4B, open weights</span></span></aside>
+    <div class="body">
+      <h3><span class="zh">Dory：不让模型多写字，让它在里面多想几遍</span><span class="en">Dory: instead of writing more, the model thinks a few more times inside</span></h3>
+      <dl class="zh">
+        <dt>科学问题</dt><dd>想让模型答得更好，主流做法是让它写更长的思维链，代价是更慢、更占显存。能不能不多写字，也让小模型变强？</dd>
+        <dt>创新点</dt><dd>72 层拆成读题 16 层、思考 40 层、作答 16 层，中间 40 层可以反复跑 1 到 4 遍。跑 4 遍相当于 192 层在工作，参数仍是 4B。同一份权重，简单题跑 1 遍，难题跑 4 遍。</dd>
+        <dt>结果</dt><dd>12 个榜单平均分：1 遍 35.2，2 遍 39.7，4 遍 40.6，跑两遍就超过 Qwen3.5-9B（32.2）。SWE-Bench Verified 从 50.3 升到 61.8。GPQA 上仍输给 Qwen3.5-9B（72.2 对 80.9），4 遍的计算量约是 1 遍的 2.7 倍。</dd>
+        <dt>源头论文</dt><dd>“同一层反复用”来自 2018 年的 Universal Transformers；近两年有工作从理论上解释循环为什么帮推理，也有人在预训练阶段就开始循环。</dd>
+        <dt>机构</dt><dd>NVIDIA</dd>
+        <dt>启发</dt><dd>除了把模型做大、让它多写字，还有第三个旋钮：在里面多算几遍。对手机和便宜显卡这种跑不动大模型的地方，这条路最有用，也正是自主可控 AI 关心的场景。</dd>
+      </dl>
+      <dl class="en">
+        <dt>The question</dt><dd>The usual way to make a model answer better is a longer chain of thought, which costs time and memory. Can a small model get stronger without writing more?</dd>
+        <dt>What's new</dt><dd>Its 72 layers split into 16 for reading, 40 for thinking and 16 for answering. The middle 40 can run 1 to 4 times. Four passes act like a 192-layer model with the same 4B parameters. One set of weights: one pass for easy questions, four for hard ones.</dd>
+        <dt>Results</dt><dd>Average over 12 benchmarks: 35.2 with one pass, 39.7 with two, 40.6 with four. Two passes already beat Qwen3.5-9B (32.2). SWE-Bench Verified rises from 50.3 to 61.8. It still trails Qwen3.5-9B on GPQA (72.2 vs 80.9), and four passes cost about 2.7 times the compute of one.</dd>
+        <dt>Where it comes from</dt><dd>Reusing the same layers goes back to Universal Transformers (2018). Recent work explains in theory why looping helps reasoning, and some groups loop from pre-training onward.</dd>
+        <dt>Who</dt><dd>NVIDIA</dd>
+        <dt>Why it matters</dt><dd>Beyond making models bigger or making them write more, there is a third dial: compute more times internally. It helps most where big models can't run, such as phones and cheap GPUs, which is exactly where sovereign AI lives.</dd>
+      </dl>
+    </div>
+  </article>
+  <p class="fmt"><span class="zh">下一期征集中：在 GitHub 开一个 issue，贴原文链接，写一句为什么值得读。</span><span class="en">Suggest the next one: open a GitHub issue with the source link and one sentence on why it's worth reading.</span></p>
+</section>
+
+<section id="projects">
+  <h2><span class="zh">在建项目</span><span class="en">Projects underway</span></h2>
+  <p class="sub"><span class="zh">精读之后，挑能动手的做成开源。第一个项目来自方向 01。</span><span class="en">After reading, we pick what we can build and make it open. The first project comes from frontier 01.</span></p>
+  <div class="proj">
+    <div>
+      <h3><span class="zh">火种记忆格式</span><span class="en">Fireseed Memory format</span><span class="badge"><span class="zh">草案 v0.1</span><span class="en">Draft v0.1</span></span></h3>
+      <p class="d"><span class="zh">一个开放、可携带、可离线的 AI 记忆格式。记忆是纯文本，一行一条，换模型、换厂商时整个带走。</span><span class="en">An open, portable, offline format for AI memory. Memories are plain text, one per line, and move with you when you change models or vendors.</span></p>
+      <ul class="zh">
+        <li>每条记忆记下来源：出自哪次对话、哪个模型</li>
+        <li>向量索引只是可重建的缓存，换模型记忆不变</li>
+        <li>遗忘就是从文件里删掉，不是打隐藏标记</li>
+        <li>规范与参考工具按 Apache-2.0 开源，正在整理后公开</li>
+      </ul>
+      <ul class="en">
+        <li>Every memory records its source: which conversation, which model</li>
+        <li>Vector indexes are a rebuildable cache, so switching models leaves memories intact</li>
+        <li>Forgetting removes the line from the file instead of hiding it</li>
+        <li>Spec and reference tool under Apache-2.0, being prepared for release</li>
+      </ul>
+    </div>
+<pre><span class="c"># memories.jsonl</span>
+{"id":"9a25…","type":"preference","content":"回答先给结论，再给解释",
+ "source":{"kind":"conversation","model":"qwen3-32b","ref":"chat/2026-10-02"}}
+{"id":"3a05…","type":"semantic","content":"常用编辑器换成了 VS Code",
+ "source":{"kind":"conversation","model":"glm-5","ref":"chat/2026-11-08"},
+ "supersedes":["92ee…"]}
+
+<span class="c"># Python only, no dependencies</span>
+python3 fsm.py init me.fsm --owner me
+python3 fsm.py seal me.fsm &amp;&amp; python3 fsm.py verify me.fsm</pre>
+  </div>
+</section>
+
+<section id="join">
+  <h2><span class="zh">参与</span><span class="en">Join</span></h2>
+  <p class="sub"><span class="zh">不需要申请。挑一件事做，做出来就是成员。</span><span class="en">No application needed. Pick something, do it, and you're a member.</span></p>
+  <div class="ways">
+    <div><h4><span class="zh">推荐一篇</span><span class="en">Suggest a read</span></h4><p><span class="zh">读到值得精读的论文或开源项目，在 GitHub 开 issue，附原文链接和一句理由。</span><span class="en">Found a paper or open project worth a deep read? Open a GitHub issue with the link and one line on why.</span></p></div>
+    <div><h4><span class="zh">认领一个方向</span><span class="en">Lead a frontier</span></h4><p><span class="zh">做方向负责人：每周挑一件进展，按“科学问题、创新点、源头论文、机构、启发”写成精读。</span><span class="en">Each week, pick one development and write it up: the question, what's new, where it comes from, who did it, why it matters.</span></p></div>
+    <div><h4><span class="zh">一起写代码</span><span class="en">Write code</span></h4><p><span class="zh">给在建项目提 PR：格式规范、参考实现、各语言的读写库。</span><span class="en">Send pull requests to active projects: the spec, the reference tool, libraries in other languages.</span></p></div>
+    <div><h4><span class="zh">翻译与传播</span><span class="en">Translate</span></h4><p><span class="zh">宣言已有七种语言。精读和文档同样需要翻译和校对。</span><span class="en">The manifesto is in seven languages. The deep reads and docs need translators and reviewers too.</span></p></div>
+  </div>
+  <div class="ways" style="margin-top:34px">
+    <div><h4><span class="zh">联合发起人</span><span class="en">Co-organizers</span></h4><p><span class="zh">愿意和我们一起定方向、带一个方向、组织每周精读和线上活动的人。</span><span class="en">People who want to shape the direction with us, lead a frontier, and run the weekly reads and online sessions.</span></p></div>
+    <div><h4><span class="zh">志愿者</span><span class="en">Volunteers</span></h4><p><span class="zh">时间多少都行：写一篇精读、校一段翻译、修一个 bug，都算。</span><span class="en">Any amount of time helps: one deep read, one translation pass, one bug fix.</span></p></div>
+    <div><h4><span class="zh">资助与赞助</span><span class="en">Funders and sponsors</span></h4><p><span class="zh">算力、经费或场地。所有资助公开列出，不换取对方向和内容的控制。</span><span class="en">Compute, funding or venues. Every sponsor is listed publicly, and support never buys control over direction or content.</span></p></div>
+  </div>
+  <p class="sub" style="margin:22px 0 0"><span class="zh">联系：在 GitHub 开 issue，标题写明“发起人”“志愿者”或“资助”。</span><span class="en">Contact: open a GitHub issue titled “Co-organizer”, “Volunteer” or “Sponsor”.</span></p>
+  <div class="rules" aria-label="Principles">
+    <span><span class="zh">开放</span><span class="en">Open</span></span><span><span class="zh">可审计</span><span class="en">Auditable</span></span><span><span class="zh">可复现</span><span class="en">Reproducible</span></span>
+    <span><span class="zh">可传承</span><span class="en">Inheritable</span></span><span><span class="zh">反垄断</span><span class="en">Anti-monopoly</span></span><span><span class="zh">守住底线</span><span class="en">Safe by design</span></span>
+  </div>
+  <div class="btns"><a class="btn solid" href="https://github.com/Apocalypse-AGI-DAO/Fireseed" target="_blank" rel="noopener"><span class="zh">去 GitHub</span><span class="en">Go to GitHub</span></a></div>
+</section>
+
+<footer><span>火种计划 Project Fireseed · Apache-2.0</span><span><span class="zh">为人类留下不受奴役的选择权。</span><span class="en">Keeping humanity's freedom to choose.</span></span></footer>
+</div>
+<script>
+(function(){
+  function set(l){document.documentElement.lang=l==="en"?"en":"zh-CN";
+    document.getElementById("l-zh").setAttribute("aria-pressed",l!=="en");
+    document.getElementById("l-en").setAttribute("aria-pressed",l==="en");
+    try{localStorage.setItem("fireseed-lang",l)}catch(e){}}
+  var saved=null;try{saved=localStorage.getItem("fireseed-lang")}catch(e){}
+  set(location.hash==="#en"?"en":saved||((navigator.language||"").toLowerCase().indexOf("zh")===0?"zh":"en"));
+  document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){set(b.dataset.l)})});
+})();
+</script>
+
+</body>
+</html>
